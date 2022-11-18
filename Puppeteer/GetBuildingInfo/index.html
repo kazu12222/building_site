@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      #AnsButton {
+        width: 100%;
+        border: solid 2px blue;
+        background-color: lightskyblue;
+        padding: 20px;
+        font-size: xx-large;
+      }
+      #title {
+        text-align: center;
+        margin: 30px;
+        font-size: xxx-large;
+      }
+      #score {
+        text-align: center;
+        margin: 30px;
+        font-size: x-large;
+        color: red;
+      }
+    </style>
+    <title>game</title>
+  </head>
+  <body>
+    <div id="app">
+      <!-- <hello-world v-for="val in build_item_array"></hello-world> -->
+      <hello-world></hello-world>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.19/lodash.min.js"></script>
+    <script>
+      //import Template from "./js/template.js";
+      //const build_info_array = require("/Users/nosewataruwa/Documents/Puppeteer/GetBuildingInfo/scraping/main.js");
+      Vue.component("hello-world", {
+        template: `<div class="nayose_head">
+        <h2 class="link">
+          <p>
+            <span class="cate">
+              中古一戸建て</span>
+            <a href="/chuko/ikkodate/fukushima/aizuwakamatsushi/suumof_70599242/" target="_blank">
+              A</a>
+          </p>
+        </h2>
+        <div class="itemBody">
+          <p class="itemDescription"></p>
+          <div class="clearfix">
+            <div class="itemImageContent clearfix">
+              <p class="mainImageRect">
+                <a href="/chuko/ikkodate/fukushima/aizuwakamatsushi/suumof_70599242/" target="_blank" data-pbcd-track-on-click="">
+                  <img alt=A src="https://suumo.jp/front/gazo/bukken/020/N010000/img/242/70599242/70599242_0020.jpg" height="127" width="170">
+                </a>
+              </p>
+            </div>
+            <div class="itemContentWrapper clearfix">
+              <dl class="itemContent clearfix">
+              <dt>価格</dt>
+                <dd class="price">650万円</dd>
+                <dt>所在地</dt>
+                <dd>福島県会津若松市館馬町</dd>
+                <dt>交通</dt>
+                <dd>ＪＲ只見線「西若松」車3km</dd>
+                <dt>間取り</dt>
+                <dd>6DK</dd>
+                <dt>土地面積</dt>
+                <dd class="col2L">198.66m²</dd>
+                <dt class="col2">建物面積</dt>
+                <dd class="col2R">147.39m²</dd>
+                <dt>築年月</dt>
+                <dd class="col2L">36年4ヶ月</dd>
+                <dt class="col2">階建</dt>
+                <dd class="col2R">-</dd>
+              </dl>
+            </div>
+          </div>
+      </div>
+      </div>`,
+      });
+
+      var app = new Vue({
+        el: "#app",
+        data: {
+          build_item_array: {
+            //オブジェクト
+            build_src: "accccd",
+            link: "",
+            address: "",
+            traffic: "",
+            price: "",
+            land_area: "",
+            build_area: "",
+            build_date: "",
+          },
+        },
+        methods: {
+          window: (onload = async function () {
+            // console.log("A");
+            // this.build_item_array = await build_info_array.main();
+            // console.log("B");
+            //     for (let i = 0; i < this.build_item_array.length; i++) {
+            //       build_item_array[i].length;
+            //     }
+          }),
+          answerIsCorrect: function (answer) {
+            let isCorrect = answer == this.correctAnswer ? true : false;
+            if (isCorrect) {
+              this.score += 1;
+            } else if (answer == "push") {
+              this.flag = true;
+            } else {
+              this.score -= 1;
+            }
+          },
+          generateAnswers: function () {
+            this.firstNumber = Math.floor(Math.random() * 50) + 1;
+            this.secondNumber = Math.floor(Math.random() * 50) + 1;
+            let answerList = [];
+
+            this.correctAnswer = this.firstNumber + this.secondNumber;
+
+            for (let i = 0; i < 3; i++) {
+              answerList.push(Math.floor(Math.random() * 100) + 1);
+            }
+            answerList.push(this.correctAnswer);
+            console.log(answerList);
+            this.choiceArray = _.shuffle(answerList);
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
