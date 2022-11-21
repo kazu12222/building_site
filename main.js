@@ -18,9 +18,13 @@ let property = {
 (async () => {
   const browser = await puppeteer.launch({
     headless: false,
-    args: ["--no-sandbox", "--start-fullscreen"],
+    args: ["--no-sandbox", "defaultViewport: null"],
   });
   const page = await browser.newPage();
+  await page.setViewport({
+    width: 1366,
+    height: 768,
+  });
   let build_array = [];
   let build_src = [];
   let link = [];
@@ -59,6 +63,10 @@ let property = {
   console.log(property);
   console.log(property.build_src.length);
   const newpage = await browser.newPage();
+  await newpage.setViewport({
+    width: 1366,
+    height: 768,
+  });
   await newpage.evaluate((property) => {
     for (i = 0; i < property.build_src.length; i++) {
       const build_src = property.build_src[i];
