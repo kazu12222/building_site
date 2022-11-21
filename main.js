@@ -1,5 +1,3 @@
-//expressモジュールの読み込み
-//const express = require("express");
 const puppeteer = require("puppeteer");
 //const { sleep } = require("../lib.js");
 const athome = require("./athome.js");
@@ -17,21 +15,12 @@ let property = {
   build_area: "",
   build_date: "",
 };
-// const app = express();
-// app.listen(8000, () => {
-//   console.log("サーバー起動中");
-// });
-
-// app.get("/scrape", async (req, res) => {
 (async () => {
   const browser = await puppeteer.launch({
     headless: false,
-    //slowMo: 30,
-    args: ["--lang=ja"],
+    args: ["--no-sandbox", "--start-fullscreen"],
   });
   const page = await browser.newPage();
-
-  //htmlを突っ込んでいく
   let build_array = [];
   let build_src = [];
   let link = [];
