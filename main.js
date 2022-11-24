@@ -22,8 +22,8 @@ let property = {
   });
   const page = await browser.newPage();
   await page.setViewport({
-    width: 1366,
-    height: 768,
+    width: 1920,
+    height: 1080,
   });
   let build_array = [];
   let build_src = [];
@@ -144,3 +144,4 @@ let property = {
     }
   }, property);
 })();
+
