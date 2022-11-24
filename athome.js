@@ -32,9 +32,20 @@ exports.athome = async function athome(page) {
   await page.select('select[name="PRICETO"]', "kp101");
   await sleep(5000);
   building_li = await page.$$("#item-list > .object");
+  let lastsrc;
 
   console.log(building_li.length);
   for (i = 0; i < building_li.length; i++) {
+    // if (i == 0) {
+    //   if (localStorage.getItem("athomesrc") != null) {
+    //     lastsrc = localStorage.getItem("athomesrc");
+    //     localStorage.removeItem("athomesrc");
+    //   }
+    //   localStorage.setItem("athomesrc", await getBuildSrc());
+    // }
+    // if (lastsrc == (await getBuildSrc())) {
+    //   break;
+    // }
     build_src.push(await getBuildSrc());
     link.push(await getLink(page));
     address.push(await getTableItem(2));
